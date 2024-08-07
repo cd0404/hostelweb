@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .manage-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .manage-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .manage-container select,
+        .manage-container input[type="text"],
+        .manage-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .manage-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .manage-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function handleSelectionChange() {
+            var type = document.getElementById('type').value;
+            if (type === 'bedroom') {
+                document.getElementById('beds-section').classList.remove('hidden');
+            } else {
+                document.getElementById('beds-section').classList.add('hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="manage-container">
+        <h2>Manage Rooms</h2>
+        <form action="/manage-rooms" method="post">
+            <label for="type">Choose Type:</label>
+            <select id="type" name="type" onchange="handleSelectionChange()" required>
+                <option value="" disabled selected>Select type</option>
+                <option value="room">Room</option>
+                <option value="bedroom">Bedroom</option>
+            </select>
+
+            <div id="room-section">
+                <label for="room-name">Room Name:</label>
+                <input type="text" id="room-name" name="room-name" placeholder="Room Name" required>
+            </div>
+
+            <div id="beds-section" class="hidden">
+                <label for="beds">Number of Beds:</label>
+                <input type="number" id="beds" name="beds" min="1" placeholder="Number of Beds">
+            </div>
+
+            <input type="submit" value="Add/Update">
+        </form>
+    </div>
+</body>
+</html>

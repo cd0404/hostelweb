@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .manage-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-bottom: 20px;
+        }
+        .manage-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .manage-container input[type="text"],
+        .manage-container input[type="number"],
+        .manage-container select,
+        .manage-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .manage-container input[type="submit"],
+        .manage-container button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .manage-container input[type="submit"]:hover,
+        .manage-container button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function toggleForm(formId) {
+            var forms = document.querySelectorAll('.form-section');
+            forms.forEach(function(form) {
+                form.classList.add('hidden');
+            });
+            document.getElementById(formId).classList.remove('hidden');
+        }
+    </script>
+</head>
+<body>
+    <h1>Manage Students</h1>
+    <div class="manage-container">
+        <button onclick="toggleForm('view-students')">View Students</button>
+        <button onclick="toggleForm('add-student')">Add Student</button>
+        <button onclick="toggleForm('update-student')">Update Student</button>
+        <button onclick="toggleForm('delete-student')">Delete Student</button>
+        <button onclick="toggleForm('allocate-room')">Allocate Room</button>
+        <button onclick="toggleForm('view-attendance')">View Attendance</button>
+    </div>
+
+    <!-- View Students Section -->
+    <div id="view-students" class="manage-container form-section hidden">
+        <h2>View Students</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll Number</th>
+                    <th>Room</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Data -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>101</td>
+                    <td>Room 1</td>
+                    <td><button onclick="toggleForm('update-student')">Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>102</td>
+                    <td>Room 2</td>
+                    <td><button onclick="toggleForm('update-student')">Edit</button> <button>Delete</button></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Student Section -->
+    <div id="add-student" class="manage-container form-section hidden">
+        <h2>Add Student</h2>
+        <form action="/add-student" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="roll-number" placeholder="Roll Number" required>
+            <input type="text" name="room" placeholder="Room">
+            <input type="submit" value="Add Student">
+        </form>
+    </div>
+
+    <!-- Update Student Section -->
+    <div id="update-student" class="manage-container form-section hidden">
+        <h2>Update Student</h2>
+        <form action="/update-student" method="post">
+            <input type="number" name="roll-number" placeholder="Roll Number" required>
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="room" placeholder="Room">
+            <input type="submit" value="Update Student">
+        </form>
+    </div>
+
+    <!-- Delete Student Section -->
+    <div id="delete-student" class="manage-container form-section hidden">
+        <h2>Delete Student</h2>
+        <form action="/delete-student" method="post">
+            <input type="number" name="roll-number" placeholder="Roll Number" required>
+            <input type="submit" value="Delete Student">
+        </form>
+    </div>
+
+    <!-- Allocate Room Section -->
+    <div id="allocate-room" class="manage-container form-section hidden">
+        <h2>Allocate Room</h2>
+        <form action="/allocate-room" method="post">
+            <input type="number" name="roll-number" placeholder="Roll Number" required>
+            <input type="text" name="room" placeholder="Room" required>
+            <input type="submit" value="Allocate Room">
+        </form>
+    </div>
+
+    <!-- View Attendance Section -->
+    <div id="view-attendance" class="manage-container form-section hidden">
+        <h2>View Attendance</h2>
+        <form action="/view-attendance" method="get">
+            <input type="number" name="roll-number" placeholder="Roll Number" required>
+            <textarea name="attendance" placeholder="Attendance Details" rows="5"></textarea>
+            <input type="submit" value="View Attendance">
+        </form>
+    </div>
+</body>
+</html>
