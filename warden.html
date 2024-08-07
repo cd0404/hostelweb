@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Page</title>
+</head>
+<body>
+    <h2>Warden Page</h2>
+    <form action="/processRequest" method="post">
+        <label for="guardianRequest">Guardian's Request:</label><br>
+        <textarea id="guardianRequest" name="guardianRequest" readonly>This is a sample request from the guardian.</textarea><br><br>
+        <input type="radio" id="approve" name="decision" value="approve">
+        <label for="approve">Approve</label><br>
+        <input type="radio" id="reject" name="decision" value="reject">
+        <label for="reject">Reject</label><br><br>
+        <input type="submit" value="Submit Decision">
+    </form>
+</body>
+</html>
